@@ -1,0 +1,111 @@
+<p>
+    Lista de cursos do portal {{nomePortal}}
+</p>
+
+<app-curso-detalhe></app-curso-detalhe>
+
+
+<ul>
+    <li *ngFor="let curso of cursos">
+        {{curso}}
+    </li>
+
+</ul>
+
+<section>
+    <article>
+        <h3> Property Binding</h3>
+        <img src="{{ urlImagem }}">
+        <img [src]="urlImagem">
+    </article>
+
+    <article>
+        <h3>Class e Style Binding</h3>
+        <div>
+            Selecione uma classe:
+            <select #classe (change)="0">
+                <option value="alert-success">Sucesso</option>
+                <option value="alert-info">Info</option>
+                <option value="alert-warning">Alerta</option>
+                <option value="alert-danger">Erro</option>
+            </select>
+            <br><br>
+
+            <div class="alert {{ classe.value }}">
+                Texto colorido conforme valor do combobox.
+            </div>
+
+            <div class="alert" role="alert"
+            [class.alert-success]="classe.value == 'alert-success'">
+            Sucesso</div>
+            <div class="alert" role="alert"
+            [class.alert-info]="classe.value == 'alert-info'"
+            >Info</div>
+            <div class="alert" role="alert"
+            [class.alert-warning]="classe.value == 'alert-warning'"
+            >Alerta</div>
+            <div class="alert" role="alert"
+            [class.alert-danger]="classe.value == 'alert-danger'"
+            >Erro</div>
+
+            <div class="alert alert-danger" role="alert" [style.display] = "classe.value == 'alert-danger' ? 'block' : 'none'">
+                Esse texto somente aparece em caso de erro.
+            </div>
+
+        </div>
+    </article>
+
+
+</section>
+
+<section class = "event-binding">
+    <article>
+        <h3>Event binding</h3>
+        <div>
+            <button (click) = "botaoClicado()"
+            class="btn btn-primary">
+            Me clique!
+            </button>
+            <input type="text"
+            (keyup)="onKeyUp($event)"
+/>
+
+            <p>Valor atual: {{ valorAtual }}</p>
+
+            <br>
+            <span
+                (mouseover)="onMouseOverOut()" 
+                (mouseout)="onMouseOverOut()"
+                [class.highlight]="isMouseOver">
+                Passe o mouse sobre mim
+            </span>
+        </div>
+    </article>
+</section>
+
+<section class="two-way-binding">
+    <article>
+        <h3>Two-way data binding</h3>
+        <div>
+            <input type="text"
+                [value] = "nome"
+
+            />
+            
+            <input type="text" [(ngModel)] = "nome">
+
+            <p>
+                Você digitou: {{ nome }}.
+            </p>
+        </div>
+
+        <div>
+            <input type="text" ngModel="pessoa.nome">
+        </div>
+        <p>
+            meu nome é {{pessoa.nome}} e tenho {{pessoa.idade}} anos de idade.
+        </p>
+    </article>
+
+</section>
+
